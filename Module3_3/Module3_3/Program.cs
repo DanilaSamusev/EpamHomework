@@ -6,18 +6,17 @@ namespace Module3_3
     {
         static void Main(string[] args)
         {
-            int number = GetNumber("number: ");
+            int number = GetNumber();
             PrintFibonacci(number);
         }
         
-        static int GetNumber(string query)
+        static int GetNumber()
         {
             while (true)
             {
-                Console.Write($"Inter the {query}");
-                bool isNumberParsed = int.TryParse(Console.ReadLine(), out int number);
-
-                if (isNumberParsed && number > 0)
+                Console.Write("Enter the number: ");
+                
+                if (int.TryParse(Console.ReadLine(), out int number) && number > 0)
                 {
                     return number;
                 }
@@ -31,7 +30,7 @@ namespace Module3_3
             int temp1 = 0;
             int temp2 = 1;
             
-            Console.Write($"result: {temp1}");
+            Console.Write($"Result: {temp1}");
             
             if (numbersCount == 1)
             {
