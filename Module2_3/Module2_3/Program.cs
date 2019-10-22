@@ -9,45 +9,34 @@ namespace Module2_3
 
         static void Main(string[] args)
         {
-            string firstNumber = GetNumber(FirstNumberQuery);
-            string secondNumber = GetNumber(SecondNumberQuery);
+            double firstNumber = GetNumber(FirstNumberQuery);
+            double secondNumber = GetNumber(SecondNumberQuery);
 
             Console.WriteLine($"Before swap: first number - {firstNumber}; second number - {secondNumber}");
             Swap(ref firstNumber, ref secondNumber);
             Console.WriteLine($"After swap: first number - {firstNumber}; second number - {secondNumber}");
         }
 
-        static string GetNumber(string query)
+        static double GetNumber(string query)
         {
             while (true)
             {
-                Console.Write($"Inter the {query}");
+                Console.Write($"Enter the {query}");
                 string number = Console.ReadLine();
                 string formattedNumber = number.Replace(',', '.');
 
-                if (IsNumberValid(formattedNumber))
+                if (double.TryParse(formattedNumber, out double parsedNumber))
                 {
-                    return number;
+                    return parsedNumber;
                 }
 
                 Console.WriteLine("Error: input data has to be a decimal\n---------------------------");
             }
         }
 
-        static bool IsNumberValid(string number)
+        static void Swap(ref double firstNumber, ref double secondNumber)
         {
-            if (number[0].Equals('.'))
-            {
-                return false;
-            }
-            
-            bool isNumberParsed = double.TryParse(number, out double parsedNumber);
-            return isNumberParsed;
-        }
-        
-        static void Swap(ref string firstNumber, ref string secondNumber)
-        {
-            string temp = firstNumber;
+            double temp = firstNumber;
             firstNumber = secondNumber;
             secondNumber = temp;
         }
