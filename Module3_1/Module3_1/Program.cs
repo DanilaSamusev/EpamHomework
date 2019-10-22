@@ -20,7 +20,7 @@ namespace Module3_1
         {
             while (true)
             {
-                Console.Write($"Inter the {query}");
+                Console.Write($"Enter the {query}");
                 bool isNumberParsed = int.TryParse(Console.ReadLine(), out int number);
 
                 if (isNumberParsed)
@@ -28,7 +28,7 @@ namespace Module3_1
                     return number;
                 }
                 
-                Console.WriteLine("Error: input data has to be an integer\n-------------------------");
+                Console.WriteLine("Error: input data has to be an integer!\n-------------------------");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Module3_1
 
         static int MakeNumberNegative(int number)
         {
-            return number - (number + number);
+            return number - (2 * number);
         }
     }
 }
