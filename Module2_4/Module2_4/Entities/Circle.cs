@@ -13,12 +13,12 @@ namespace Module2_4.Entities
             Area = Math.PI * Math.Pow(Radius, 2);
         }
 
-        public override void InitializeByPerimeter(double perimeter)
+        public override void GetPerimeter(double perimeter)
         {
             InitializeByParameter(perimeter / (2 * Math.PI));
         }
 
-        public override void InitializeByArea(double area)
+        public override void GetArea(double area)
         {
             InitializeByParameter(Math.Sqrt(area / Math.PI));
         }

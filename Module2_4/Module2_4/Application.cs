@@ -48,7 +48,7 @@ namespace Module2_4
                     
                     foreach (var shape in shapes)
                     {
-                        shape.InitializeByPerimeter(requiredShape.Perimeter);
+                        shape.GetPerimeter(requiredShape.Perimeter);
                         result += $"{shape.Name} possible area is: {shape.Area} \n";
                     }
 
@@ -61,7 +61,7 @@ namespace Module2_4
 
                     foreach (var shape in shapes)
                     {
-                        shape.InitializeByArea(requiredShape.Area);
+                        shape.GetArea(requiredShape.Area);
                         result += $"{shape.Name} possible perimeter is: {shape.Perimeter} \n";
                     }
 
@@ -73,7 +73,7 @@ namespace Module2_4
 
         static Shape ChooseShape()
         {
-            Console.Write("Inter the name of shape: circle, triangle or square - ");
+            Console.Write("Enter the name of shape: circle, triangle or square - ");
             string shapeType = Console.ReadLine();
             Shape requiredShape = null;
 
@@ -103,14 +103,8 @@ namespace Module2_4
         {
             Console.Write("Inter perimeter or area - ");
             string consoleData = Console.ReadLine();
-            string shapeData = null;
 
-            if (consoleData == "area" || consoleData == "perimeter")
-            {
-                shapeData = consoleData;
-            }
-
-            return shapeData;
+            return consoleData == "area" || consoleData == "perimeter" ? consoleData : null;
         }
     }
 }

@@ -9,19 +9,17 @@ namespace Module2_4
         {
             double shapeParameter = 0;
             
-            if (shape is Triangle)
+            switch (shape)
             {
-                shapeParameter = AskTriangleParameters();
-            }
-
-            if (shape is Square)
-            {
-                shapeParameter = AskSquareParameters();
-            }
-
-            if (shape is Circle)
-            {
-                shapeParameter = AskCircleParameters();
+                case Triangle _:
+                    shapeParameter = AskTriangleParameters();
+                    break;
+                case Square _:
+                    shapeParameter = AskSquareParameters();
+                    break;
+                case Circle _:
+                    shapeParameter = AskCircleParameters();
+                    break;
             }
 
             return shapeParameter;
@@ -29,17 +27,17 @@ namespace Module2_4
         
         private double AskTriangleParameters()
         {
-            return StringParser.GetDouble("triangle side length:");
+            return DataParser.GetDouble("triangle side length:");
         }
         
         private double AskSquareParameters()
         {
-            return StringParser.GetDouble("square side length:");
+            return DataParser.GetDouble("square side length:");
         }
         
         private double AskCircleParameters()
         {
-            return StringParser.GetDouble("circle radius:");
+            return DataParser.GetDouble("circle radius:");
         }
     }
 }

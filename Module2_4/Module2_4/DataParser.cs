@@ -2,7 +2,7 @@
 
 namespace Module2_4
 {
-    public class StringParser
+    public class DataParser
     {
         public static double GetDouble(string query)
         {

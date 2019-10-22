@@ -6,7 +6,7 @@
         public double Perimeter { get; set; }
         public string Name { get; set; }
         public abstract void InitializeByParameter(double parameter);
-        public abstract void InitializeByPerimeter(double perimeter);
-        public abstract void InitializeByArea(double area);
+        public abstract void GetPerimeter(double perimeter);
+        public abstract void GetArea(double area);
     }
 }
