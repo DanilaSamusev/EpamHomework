@@ -6,33 +6,39 @@ namespace Module3_2
     {
         static void Main(string[] args)
         {
-            int number = GetNumber("number: ");
+            int number = GetNumber();
             PrintNumbers(number);
         }
         
-        static int GetNumber(string query)
+        static int GetNumber()
         {
             while (true)
             {
-                Console.Write($"Inter the {query}");
-                bool isNumberParsed = int.TryParse(Console.ReadLine(), out int number);
+                Console.Write("Enter the number: ");
 
-                if (isNumberParsed)
+                if (int.TryParse(Console.ReadLine(), out int number) && number > 0)
                 {
                     return number;
                 }
                 
-                Console.WriteLine("Error: input data has to be an integer\n-------------------------");
+                Console.WriteLine("Error: input data has to be a positive integer!\n-------------------------");
             }
         }
 
         static void PrintNumbers(int numbersCount)
         {
             Console.Write("result: ");
+            var number = 2;
             
-            for (var i = 1; i <= numbersCount; i++)
+            for (var i = 1; i <= numbersCount;)
             {
-                Console.Write($"{i} ");
+                if (number % 2 == 0)
+                {
+                    Console.Write($"{number} ");
+                    i++;
+                }
+                
+                number++;
             }
         }
     }
