@@ -40,12 +40,12 @@ namespace Module2_1
                 Console.Write($"Enter the {query}");
                 bool isDataParsed = float.TryParse(Console.ReadLine(), out float data);
 
-                if (isDataParsed && data >= 0 && data <= 100)
+                if (isDataParsed && data >= 0 && data < 100)
                 {
                     return data;
                 }
 
-                Console.WriteLine("Error: input data has to be a positive number!\n-----------------------------");
+                Console.WriteLine("Error: input data has to be a positive number less the 100!\n-----------------------------");
             }
         }
         
@@ -56,7 +56,7 @@ namespace Module2_1
                 Console.Write($"Enter the {query}");
                 bool isDataParsed = float.TryParse(Console.ReadLine(), out float data);
 
-                if (isDataParsed && data >= 0 && data <= 100)
+                if (isDataParsed && data >= 0)
                 {
                     return data;
                 }
