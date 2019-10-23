@@ -36,7 +36,7 @@ namespace Module3_8
 
         static double FindSolution(double leftBound, double rightBound, double accuracy)
         {
-            while (true)
+            while (Math.Abs(rightBound - leftBound) > accuracy)
             {
                 double solution = (leftBound + rightBound) / 2;
                 
@@ -49,12 +49,9 @@ namespace Module3_8
                 {
                     leftBound = solution;
                 }
-
-                if (Math.Abs(rightBound - leftBound) < accuracy)
-                {
-                    return (leftBound + rightBound) / 2;
-                }
             }
+            
+            return (leftBound + rightBound) / 2;
         }
         static double Function(double x)
         {
