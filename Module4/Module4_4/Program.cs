@@ -7,12 +7,12 @@ namespace Module4_4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Increase(1, 2, 3));
+            Console.WriteLine(IncreaseNumbers(1, 2, 3));
             Console.WriteLine(CountCircleLengthAndArea(4));
             Console.WriteLine(FindMaxAndMinAndArraySum(new []{1, 2, 3}));
         }
 
-        static (int, int, int) Increase(int firstNumber, int secondNumber, int thirdNumber)
+        static (int, int, int) IncreaseNumbers(int firstNumber, int secondNumber, int thirdNumber)
         {
             const int coefficient = 10;
             return (firstNumber + coefficient, secondNumber + coefficient, thirdNumber + coefficient);

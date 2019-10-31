@@ -19,7 +19,7 @@ namespace Module4_7
         {
             while (true)
             {
-                Console.Write("Inter sort direction: up or down - ");
+                Console.Write("Enter sort direction: up or down - ");
                 string direction = Console.ReadLine();
 
                 if (direction == "up" || direction == "down")

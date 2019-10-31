@@ -64,7 +64,6 @@ namespace Module4_1
 
         static double FindMinAndMaxSubtraction(double[] array)
         {
-
             return FindMaxInArray(array) - FindMinInArray(array);
         }
 

@@ -9,13 +9,13 @@ namespace Module4_6
             double[] array = {1, 3, 5.1, 42};
             Console.Write("Your array: ");
             DisplayArray(array);
-            IncreaseArray(array);
+            IncreaseArrayElements(array);
             Console.WriteLine();
             Console.Write("Increased array: ");
             DisplayArray(array);
         }
 
-        static void IncreaseArray(double[] array)
+        static void IncreaseArrayElements(double[] array)
         {
             const int coefficient = 5;
 

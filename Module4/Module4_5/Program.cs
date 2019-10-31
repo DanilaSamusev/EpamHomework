@@ -15,7 +15,7 @@ namespace Module4_5
             
             int monthNumber = stringParser.GetInt();
             int daysInMonth = CountDaysInMonth(monthNumber);
-            Console.WriteLine($"Days: {daysInMonth}");
+            Console.WriteLine($"Days in month: {daysInMonth}");
         }
         private static double Count(double number1, double number2, Operation operation)
         {

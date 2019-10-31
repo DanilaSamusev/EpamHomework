@@ -63,24 +63,24 @@ namespace Module4_2
                 smallArray = firstArray;
             }
 
-            var sumArray = new double[bigArray.Length];
-            Array.Copy(bigArray, sumArray, bigArray.Length);
+            var summedArray = new double[bigArray.Length];
+            Array.Copy(bigArray, summedArray, bigArray.Length);
             
             for (var i = 0; i < smallArray.Length; i++)
             {
-                sumArray[i] += smallArray[i];
+                summedArray[i] += smallArray[i];
             }
 
-            return sumArray;
+            return summedArray;
         }
 
         static string GetArrayAsString(double[] array)
         {
-            string arrayString = "";
+            var arrayString = string.Empty;
             
             foreach (var number in array)
             {
-                arrayString += ($"{number} ");
+                arrayString += (number);
             }
 
             return arrayString;

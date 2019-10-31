@@ -6,8 +6,8 @@ namespace Module4_8
     {
         static void Main(string[] args)
         {
-            double leftBound = GetData("first bound: ");
-            double rightBound = GetData("second bound: ");
+            double leftBound = GetData("First bound: ");
+            double rightBound = GetData("Second bound: ");
             double accuracy = GetData("e: ");
             double solution = FindSolution(leftBound, rightBound, accuracy);
             Console.WriteLine($"Solution: x = {solution}");
@@ -17,7 +17,7 @@ namespace Module4_8
         {
             while (true)
             {
-                Console.Write($"Inter the {query}");
+                Console.Write($"Enter the {query}");
 
                 if (double.TryParse(Console.ReadLine(), out double number))
                 {
@@ -32,12 +32,12 @@ namespace Module4_8
         {
             double solution = (leftBound + rightBound) / 2;
 
-            if (Function(leftBound) * Function(solution) < 0)
+            if (GetFunctionSolution(leftBound) * GetFunctionSolution(solution) < 0)
             {
                 rightBound = solution;
             }
 
-            if (Function(rightBound) * Function(solution) < 0)
+            if (GetFunctionSolution(rightBound) * GetFunctionSolution(solution) < 0)
             {
                 leftBound = solution;
             }
@@ -50,7 +50,7 @@ namespace Module4_8
             return FindSolution(leftBound, rightBound, accuracy);
         }
 
-        static double Function(double x)
+        static double GetFunctionSolution(double x)
         {
             return 4 * Math.Pow(x, 3) + 4 * x + 1;
         }
