@@ -2,16 +2,16 @@
 
  namespace FinancialAnalyzer
 {
-    public class CashNote
+    public class FinanceNote
     {
         public long Id { get; }
-        public decimal CashAmount { get; }
+        public decimal FinanceAmount { get; }
         public DateTime CreationDate { get; }
 
-        public CashNote(long id, decimal cashAmount)
+        public FinanceNote(long id, decimal financeAmount)
         {
             Id = id;
-            CashAmount = cashAmount;
+            FinanceAmount = financeAmount;
             CreationDate = DateTime.UtcNow;
         }
     }

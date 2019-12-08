@@ -3,15 +3,15 @@ using FinancialAnalyzer;
 
 namespace ApplicationStarter
 {
-    public class CashNoteMapper
+    public class FinancialNoteMapper
     {
-        public string MapCashNoteToTable(IEnumerable<CashNote> notes)
+        public string MapFinancialNotesToTable(IEnumerable<FinanceNote> notes)
         {
             var table = "";
             
             foreach (var note in notes)
             {
-                table += $"{note.CashAmount} {note.CreationDate:dd.MM.yyyy}\n";
+                table += $"{note.FinanceAmount} {note.CreationDate:dd.MM.yyyy}\n";
             }
 
             return table;

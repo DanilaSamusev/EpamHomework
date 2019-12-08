@@ -14,14 +14,14 @@ namespace ApplicationStarter
                                     "to finish session press 5\n";
         private const string AddingIsSuccessful = "Data has been added.";
         private readonly IClient _client;
-        private readonly CashFlowAnalyzer _cashFlowAnalyzer;
-        private readonly CashNoteMapper _cashNoteMapper;
+        private readonly FinancialFlowAnalyzer _financialFlowAnalyzer;
+        private readonly FinancialNoteMapper _financialNoteMapper;
 
         public Application()
         {
-            _cashNoteMapper = new CashNoteMapper();
+            _financialFlowAnalyzer = new FinancialFlowAnalyzer();
+            _financialNoteMapper = new FinancialNoteMapper();
             _client = new ConsoleClient();
-            _cashFlowAnalyzer = new CashFlowAnalyzer();
         }
         
         public void Start()
@@ -55,28 +55,28 @@ namespace ApplicationStarter
                 case (int)Action.AddIncome:
                 {
                     var moneyAmount = _client.GetMoneyAmount();
-                    _cashFlowAnalyzer.AddNoteAboutIncome(moneyAmount);
+                    _financialFlowAnalyzer.AddNoteAboutIncome(moneyAmount);
                     _client.Write(AddingIsSuccessful); 
                     break;
                 }
                 case (int)Action.AddExpense:
                 {
                     var moneyAmount = _client.GetMoneyAmount();
-                    _cashFlowAnalyzer.AddNoteAboutExpense(moneyAmount);
+                    _financialFlowAnalyzer.AddNoteAboutExpense(moneyAmount);
                     _client.Write(AddingIsSuccessful);
                     break;
                 }
                 case (int)Action.ShowIncomes:
                 {
                     _client.Write("Your incomes");
-                    var table = _cashNoteMapper.MapCashNoteToTable(_cashFlowAnalyzer.Incomes);
+                    var table = _financialNoteMapper.MapFinancialNotesToTable(_financialFlowAnalyzer.Incomes);
                     _client.Write(table);
                     break;
                 }
                 case (int)Action.ShowExpenses:
                 {
                     _client.Write("Your expenses");
-                    var table = _cashNoteMapper.MapCashNoteToTable(_cashFlowAnalyzer.Expenses);
+                    var table = _financialNoteMapper.MapFinancialNotesToTable(_financialFlowAnalyzer.Expenses);
                     _client.Write(table);
                     break;
                 }

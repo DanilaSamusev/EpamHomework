@@ -36,12 +36,12 @@ namespace Client
         public decimal GetMoneyAmount()
         {
             _writer.Write("Inter cash amount: ");
-            var cashAmount = _reader.Read();
-            var isCashAmountParsed = decimal.TryParse(cashAmount, out var parsedCashAmount);
+            var financeAmount = _reader.Read();
+            var isFinanceAmountParsed = decimal.TryParse(financeAmount, out var parsedFinanceAmount);
             
-            if (isCashAmountParsed)
+            if (isFinanceAmountParsed)
             {
-                return parsedCashAmount;
+                return parsedFinanceAmount;
             }
             
             throw new ArgumentException("Number has to be a positive.");

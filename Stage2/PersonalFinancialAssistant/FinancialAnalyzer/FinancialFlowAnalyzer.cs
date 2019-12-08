@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace FinancialAnalyzer
 {
-    public class CashFlowAnalyzer
+    public class FinancialFlowAnalyzer
     {
         private const string FinancialNoteAddingError = "Error! Money amount has to be a positive number.";
-        public List<CashNote> Incomes { get; }
-        public List<CashNote> Expenses { get; }
+        public List<FinanceNote> Incomes { get; }
+        public List<FinanceNote> Expenses { get; }
 
-        public CashFlowAnalyzer()
+        public FinancialFlowAnalyzer()
         {
-            Incomes = new List<CashNote>();
-            Expenses = new List<CashNote>();
+            Incomes = new List<FinanceNote>();
+            Expenses = new List<FinanceNote>();
         }
 
         public void AddNoteAboutIncome(decimal cashAmount)
@@ -22,7 +22,7 @@ namespace FinancialAnalyzer
                 throw new ArgumentException(FinancialNoteAddingError);
             }
 
-            var cashNote = new CashNote(Incomes.Count + 1, cashAmount);
+            var cashNote = new FinanceNote(Incomes.Count + 1, cashAmount);
             Incomes.Add(cashNote);
         }
 
@@ -33,7 +33,7 @@ namespace FinancialAnalyzer
                 throw new ArgumentException(FinancialNoteAddingError);
             }
 
-            var cashNote = new CashNote(Expenses.Count + 1, cashAmount);
+            var cashNote = new FinanceNote(Expenses.Count + 1, cashAmount);
             Expenses.Add(cashNote);
         }
     }
