@@ -8,10 +8,15 @@ namespace Client
         private readonly IWriter _writer;
         private readonly IReader _reader;
 
-        public ConsoleClient()
+        public ConsoleClient(IWriter writer, IReader reader)
         {
-            _writer = new ConsoleWriter();
-            _reader = new ConsoleReader();
+            _writer = writer;
+            _reader = reader;
+        }
+
+        public void Run()
+        {
+            
         }
         
         public void Write(string message)
