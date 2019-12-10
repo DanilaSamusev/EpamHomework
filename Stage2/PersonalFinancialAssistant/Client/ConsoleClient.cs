@@ -1,5 +1,6 @@
 ﻿using System;
 using Client.Interfaces;
+using FinancialService;
 
 namespace Client
 {
@@ -7,21 +8,48 @@ namespace Client
     {
         private readonly IWriter _writer;
         private readonly IReader _reader;
+        private readonly IFinancialService _financialService;
+        private readonly FinancialNoteMapper _financialNoteMapper;
 
-        public ConsoleClient(IWriter writer, IReader reader)
+        private const string MenuMessage = "If you want to add an income press 1\n" +
+                                           "to add an expense press 2\n" +
+                                           "to see all your incomes press 3\n" +
+                                           "to see all your expenses press 4\n" +
+                                           "to finish session press 5\n";
+
+        private const string AddingIsSuccessful = "Data has been added.";
+
+        public ConsoleClient(IWriter writer, IReader reader, IFinancialService financialService,
+            FinancialNoteMapper financialNoteMapper)
         {
             _writer = writer;
             _reader = reader;
+            _financialService = financialService;
+            _financialNoteMapper = financialNoteMapper;
         }
 
         public void Run()
         {
-            
-        }
-        
-        public void Write(string message)
-        {
-            _writer.Write(message);
+            var isSessionOver = false;
+            _writer.Write(MenuMessage);
+
+            while (!isSessionOver)
+            {
+                try
+                {
+                    var action = GetAction();
+                    PerformAction(action);
+
+                    if (action == (int) Action.Exit)
+                    {
+                        isSessionOver = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    _writer.Write(e.Message);
+                }
+            }
         }
 
         public int GetAction()
@@ -34,22 +62,59 @@ namespace Client
             {
                 return parsedAction;
             }
-            
+
             throw new ArgumentException("Error! Check entered value.");
         }
-        
-        public decimal GetMoneyAmount()
+
+        public decimal GetFinanceAmount()
         {
-            _writer.Write("Inter cash amount: ");
+            _writer.Write("Inter finance amount: ");
             var financeAmount = _reader.Read();
             var isFinanceAmountParsed = decimal.TryParse(financeAmount, out var parsedFinanceAmount);
-            
+
             if (isFinanceAmountParsed)
             {
                 return parsedFinanceAmount;
             }
-            
+
             throw new ArgumentException("Number has to be a positive.");
+        }
+
+        private void PerformAction(int action)
+        {
+            switch (action)
+            {
+                case (int) Action.AddIncome:
+                {
+                    var financeAmount = GetFinanceAmount();
+                    _financialService.AddIncome(financeAmount);
+                    _writer.Write(AddingIsSuccessful);
+                    break;
+                }
+                case (int) Action.AddExpense:
+                {
+                    var financeAmount = GetFinanceAmount();
+                    _financialService.AddExpense(financeAmount);
+                    _writer.Write(AddingIsSuccessful);
+                    break;
+                }
+                case (int) Action.ShowIncomes:
+                {
+                    _writer.Write("Your incomes");
+                    var financialNotesDto = _financialService.GetAllIncomes();
+                    var table = _financialNoteMapper.MapFinancialNotesToTable(financialNotesDto);
+                    _writer.Write(table);
+                    break;
+                }
+                case (int) Action.ShowExpenses:
+                {
+                    _writer.Write("Your expenses");
+                    var financialNotesDto = _financialService.GetAllExpenses();
+                    var table = _financialNoteMapper.MapFinancialNotesToTable(financialNotesDto);
+                    _writer.Write(table);
+                    break;
+                }
+            }
         }
     }
 }

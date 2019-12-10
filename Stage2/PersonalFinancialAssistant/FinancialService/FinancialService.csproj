@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FinancialService\FinancialService.csproj" />
+      <ProjectReference Include="..\FinancialAnalyzer\FinancialAnalyzer.csproj" />
     </ItemGroup>
 
 </Project>

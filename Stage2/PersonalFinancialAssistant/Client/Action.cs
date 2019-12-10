@@ -1,4 +1,4 @@
-﻿namespace ApplicationStarter
+﻿namespace Client
 {
     public enum Action
     {

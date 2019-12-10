@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using FinancialAnalyzer;
+using FinancialService;
 
-namespace ApplicationStarter
+namespace Client
 {
     public class FinancialNoteMapper
     {
-        public string MapFinancialNotesToTable(IEnumerable<FinanceNote> notes)
+        public string MapFinancialNotesToTable(IEnumerable<FinancialNoteDto> notes)
         {
             var table = "";
             

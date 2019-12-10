@@ -15,7 +15,7 @@ namespace FinancialAnalyzer
             Expenses = new List<FinanceNote>();
         }
 
-        public void AddNoteAboutIncome(decimal cashAmount)
+        public void AddIncome(decimal cashAmount)
         {
             if (cashAmount <= 0)
             {
@@ -26,7 +26,7 @@ namespace FinancialAnalyzer
             Incomes.Add(cashNote);
         }
 
-        public void AddNoteAboutExpense(decimal cashAmount)
+        public void AddExpense(decimal cashAmount)
         {
             if (cashAmount <= 0)
             {
