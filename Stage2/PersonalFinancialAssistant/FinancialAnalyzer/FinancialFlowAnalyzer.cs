@@ -36,5 +36,22 @@ namespace FinancialAnalyzer
             var cashNote = new FinanceNote(Expenses.Count + 1, cashAmount);
             Expenses.Add(cashNote);
         }
+
+        public decimal CountTotalFinancialFlow()
+        {
+            decimal totalFinancialFlow = 0;
+
+            foreach (var income in Incomes)
+            {
+                totalFinancialFlow += income.FinanceAmount;
+            }
+
+            foreach (var expense in Expenses)
+            {
+                totalFinancialFlow -= expense.FinanceAmount;
+            }
+
+            return totalFinancialFlow;
+        }
     }
 }

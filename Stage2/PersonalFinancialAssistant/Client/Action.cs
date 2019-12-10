@@ -6,6 +6,7 @@
         AddExpense = 2,
         ShowIncomes = 3,
         ShowExpenses = 4,
-        Exit = 5,
+        ShowTotalFinancialFlow = 5,
+        Exit = 6,
     }
 }

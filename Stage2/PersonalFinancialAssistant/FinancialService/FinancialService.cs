@@ -49,5 +49,10 @@ namespace FinancialService
         {
             _financialFlowAnalyzer.AddIncome(financeAmount);
         }
+
+        public decimal GetTotalFinancialFlow()
+        {
+            return _financialFlowAnalyzer.CountTotalFinancialFlow();
+        }
     }
 }

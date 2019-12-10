@@ -15,7 +15,8 @@ namespace Client
                                            "to add an expense press 2\n" +
                                            "to see all your incomes press 3\n" +
                                            "to see all your expenses press 4\n" +
-                                           "to finish session press 5\n";
+                                           "to see your total financial flow press 5\n" +
+                                           "to finish session press 6\n";
 
         private const string AddingIsSuccessful = "Data has been added.";
 
@@ -30,8 +31,8 @@ namespace Client
 
         public void Run()
         {
-            var isSessionOver = false;
             _writer.Write(MenuMessage);
+            var isSessionOver = false;
 
             while (!isSessionOver)
             {
@@ -100,7 +101,7 @@ namespace Client
                 }
                 case (int) Action.ShowIncomes:
                 {
-                    _writer.Write("Your incomes");
+                    _writer.Write("Your incomes:");
                     var financialNotesDto = _financialService.GetAllIncomes();
                     var table = _financialNoteMapper.MapFinancialNotesToTable(financialNotesDto);
                     _writer.Write(table);
@@ -108,10 +109,17 @@ namespace Client
                 }
                 case (int) Action.ShowExpenses:
                 {
-                    _writer.Write("Your expenses");
+                    _writer.Write("Your expenses:");
                     var financialNotesDto = _financialService.GetAllExpenses();
                     var table = _financialNoteMapper.MapFinancialNotesToTable(financialNotesDto);
                     _writer.Write(table);
+                    break;
+                }
+                case (int) Action.ShowTotalFinancialFlow:
+                {
+                    _writer.Write("Your financial flow:");
+                    var totalFinancialFlow = _financialService.GetTotalFinancialFlow();
+                    _writer.Write(totalFinancialFlow.ToString());
                     break;
                 }
             }

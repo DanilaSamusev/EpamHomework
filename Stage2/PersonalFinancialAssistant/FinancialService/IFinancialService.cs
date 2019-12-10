@@ -6,6 +6,7 @@ namespace FinancialService
     {
         IEnumerable<FinancialNoteDto> GetAllExpenses();
         IEnumerable<FinancialNoteDto> GetAllIncomes();
+        decimal GetTotalFinancialFlow();
         void AddExpense(decimal financeAmount);
         void AddIncome(decimal financeAmount);
     }
