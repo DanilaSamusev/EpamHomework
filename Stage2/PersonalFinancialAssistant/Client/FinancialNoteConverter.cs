@@ -3,9 +3,9 @@ using FinancialService;
 
 namespace Client
 {
-    public class FinancialNoteMapper
+    public class FinancialNoteConverter
     {
-        public string MapFinancialNotesToTable(IEnumerable<FinancialNoteDto> notes)
+        public string ConvertFinancialNoteToStringTable(IEnumerable<FinancialNoteDto> notes)
         {
             var table = "";
             

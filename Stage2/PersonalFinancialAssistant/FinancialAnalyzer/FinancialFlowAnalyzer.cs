@@ -6,13 +6,13 @@ namespace FinancialAnalyzer
     public class FinancialFlowAnalyzer
     {
         private const string FinancialNoteAddingError = "Error! Money amount has to be a positive number.";
-        public List<FinanceNote> Incomes { get; }
-        public List<FinanceNote> Expenses { get; }
+        public List<FinancialNote> Incomes { get; }
+        public List<FinancialNote> Expenses { get; }
 
         public FinancialFlowAnalyzer()
         {
-            Incomes = new List<FinanceNote>();
-            Expenses = new List<FinanceNote>();
+            Incomes = new List<FinancialNote>();
+            Expenses = new List<FinancialNote>();
         }
 
         public void AddIncome(decimal cashAmount)
@@ -22,7 +22,7 @@ namespace FinancialAnalyzer
                 throw new ArgumentException(FinancialNoteAddingError);
             }
 
-            var cashNote = new FinanceNote(Incomes.Count + 1, cashAmount);
+            var cashNote = new FinancialNote(Incomes.Count + 1, cashAmount);
             Incomes.Add(cashNote);
         }
 
@@ -33,7 +33,7 @@ namespace FinancialAnalyzer
                 throw new ArgumentException(FinancialNoteAddingError);
             }
 
-            var cashNote = new FinanceNote(Expenses.Count + 1, cashAmount);
+            var cashNote = new FinancialNote(Expenses.Count + 1, cashAmount);
             Expenses.Add(cashNote);
         }
 

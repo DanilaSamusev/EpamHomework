@@ -2,13 +2,13 @@
 
  namespace FinancialAnalyzer
 {
-    public class FinanceNote
+    public class FinancialNote
     {
         public long Id { get; }
         public decimal FinanceAmount { get; }
         public DateTime CreationDate { get; }
 
-        public FinanceNote(long id, decimal financeAmount)
+        public FinancialNote(long id, decimal financeAmount)
         {
             Id = id;
             FinanceAmount = financeAmount;
