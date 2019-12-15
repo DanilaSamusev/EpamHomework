@@ -14,7 +14,7 @@ namespace ApplicationStarter
             collection.AddScoped<IClient, ConsoleClient>();
             collection.AddScoped<IWriter, ConsoleWriter>();
             collection.AddScoped<IReader, ConsoleReader>();
-            collection.AddScoped<FinancialNoteMapper>();
+            collection.AddScoped<FinancialNoteConverter>();
             collection.AddScoped<IFinancialService, FinancialService.FinancialService>();
             collection.AddSingleton<FinancialFlowAnalyzer>();
             var serviceProvider = collection.BuildServiceProvider();

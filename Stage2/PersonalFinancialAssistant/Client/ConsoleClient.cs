@@ -1,6 +1,7 @@
 ﻿using System;
 using Client.Interfaces;
 using FinancialService;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -9,8 +10,7 @@ namespace Client
         private readonly IWriter _writer;
         private readonly IReader _reader;
         private readonly IFinancialService _financialService;
-        private readonly FinancialNoteMapper _financialNoteMapper;
-
+        private readonly FinancialNoteConverter _financialNoteConverter;
         private const string MenuMessage = "If you want to add an income press 1\n" +
                                            "to add an expense press 2\n" +
                                            "to see all your incomes press 3\n" +
@@ -21,12 +21,12 @@ namespace Client
         private const string AddingIsSuccessful = "Data has been added.";
 
         public ConsoleClient(IWriter writer, IReader reader, IFinancialService financialService,
-            FinancialNoteMapper financialNoteMapper)
+            FinancialNoteConverter financialNoteConverter)
         {
             _writer = writer;
             _reader = reader;
             _financialService = financialService;
-            _financialNoteMapper = financialNoteMapper;
+            _financialNoteConverter = financialNoteConverter;
         }
 
         public void Run()
@@ -103,7 +103,7 @@ namespace Client
                 {
                     _writer.Write("Your incomes:");
                     var financialNotesDto = _financialService.GetAllIncomes();
-                    var table = _financialNoteMapper.MapFinancialNotesToTable(financialNotesDto);
+                    var table = _financialNoteConverter.ConvertFinancialNoteToStringTable(financialNotesDto);
                     _writer.Write(table);
                     break;
                 }
@@ -111,7 +111,7 @@ namespace Client
                 {
                     _writer.Write("Your expenses:");
                     var financialNotesDto = _financialService.GetAllExpenses();
-                    var table = _financialNoteMapper.MapFinancialNotesToTable(financialNotesDto);
+                    var table = _financialNoteConverter.ConvertFinancialNoteToStringTable(financialNotesDto);
                     _writer.Write(table);
                     break;
                 }
@@ -123,6 +123,20 @@ namespace Client
                     break;
                 }
             }
+        }
+
+        private void SetActionsDictionary()
+        {
+            var actionsDictionary = new Dictionary<Enum, Action<decimal>> 
+            {
+                {Action.AddIncome, (decimal x) =>
+                    {
+                        _financialService.AddIncome(x);
+                        Console.Write("");
+                    }
+                },
+                {Action.AddIncome, (decimal x) => _financialService.AddIncome(x)},
+            };          
         }
     }
 }
