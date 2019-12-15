@@ -11,7 +11,7 @@ namespace Client
             
             foreach (var note in notes)
             {
-                table += $"Finance amount: {note.FinanceAmount} | date: {note.CreationDate:dd.MM.yyyy}\n";
+                table += $"{note.FinanceAmount} {note.CreationDate:dd.MM.yyyy}\n";
             }
 
             return table;

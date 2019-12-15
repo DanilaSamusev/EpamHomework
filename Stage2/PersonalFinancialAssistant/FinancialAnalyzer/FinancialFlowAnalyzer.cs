@@ -6,7 +6,6 @@ namespace FinancialAnalyzer
     public class FinancialFlowAnalyzer
     {
         private const string FinancialNoteAddingError = "Error! Money amount has to be a positive number.";
-        private const decimal Taxes = 13;
         public List<FinanceNote> Incomes { get; }
         public List<FinanceNote> Expenses { get; }
 
@@ -16,27 +15,26 @@ namespace FinancialAnalyzer
             Expenses = new List<FinanceNote>();
         }
 
-        public void AddIncome(decimal financeAmount)
+        public void AddIncome(decimal cashAmount)
         {
-            if (financeAmount <= 0)
+            if (cashAmount <= 0)
             {
                 throw new ArgumentException(FinancialNoteAddingError);
             }
 
-            var financeAmountWithTaxes = CountFinanceAmountWithTaxes(financeAmount);
-            var financeNote = new FinanceNote(Incomes.Count + 1, financeAmountWithTaxes);
-            Incomes.Add(financeNote);
+            var cashNote = new FinanceNote(Incomes.Count + 1, cashAmount);
+            Incomes.Add(cashNote);
         }
 
-        public void AddExpense(decimal financeAmount)
+        public void AddExpense(decimal cashAmount)
         {
-            if (financeAmount <= 0)
+            if (cashAmount <= 0)
             {
                 throw new ArgumentException(FinancialNoteAddingError);
             }
 
-            var financeNote = new FinanceNote(Expenses.Count + 1, financeAmount);
-            Expenses.Add(financeNote);
+            var cashNote = new FinanceNote(Expenses.Count + 1, cashAmount);
+            Expenses.Add(cashNote);
         }
 
         public decimal CountTotalFinancialFlow()
@@ -54,11 +52,6 @@ namespace FinancialAnalyzer
             }
 
             return totalFinancialFlow;
-        }
-
-        private decimal CountFinanceAmountWithTaxes(decimal financeAmount)
-        {
-            return financeAmount / 100 * (100 - Taxes);
         }
     }
 }
