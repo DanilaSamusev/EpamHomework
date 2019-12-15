@@ -1,7 +1,6 @@
 ﻿using System;
 using Client.Interfaces;
 using FinancialService;
-using System.Collections.Generic;
 
 namespace Client
 {
@@ -123,20 +122,6 @@ namespace Client
                     break;
                 }
             }
-        }
-
-        private void SetActionsDictionary()
-        {
-            var actionsDictionary = new Dictionary<Enum, Action<decimal>> 
-            {
-                {Action.AddIncome, (decimal x) =>
-                    {
-                        _financialService.AddIncome(x);
-                        Console.Write("");
-                    }
-                },
-                {Action.AddIncome, (decimal x) => _financialService.AddIncome(x)},
-            };          
         }
     }
 }
