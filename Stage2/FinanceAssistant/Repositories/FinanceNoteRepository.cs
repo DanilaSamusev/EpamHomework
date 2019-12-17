@@ -1,10 +1,19 @@
-﻿using System;
+﻿using Models;
+using RepositoryContracts;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Repositories
 {
-    class FinanceNoteRepository
+    class FinanceNoteRepository : IFinanceNoteRepository
     {
+        public void Add(FinanceNote note)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<FinanceNote> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

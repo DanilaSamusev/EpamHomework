@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RepositoryContracts
 {
-    interface IFinanceNoteRepository
+    public interface IFinanceNoteRepository
     {
+        void Add(FinanceNote note);
+        IEnumerable<FinanceNote> GetAll();
     }
 }
