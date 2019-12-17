@@ -1,13 +1,9 @@
 ﻿using System;
-using Client.Interfaces;
-using FinancialService;
 
 namespace Client
 {
-    public class ConsoleClient : IClient
-    {
-        private readonly IWriter _writer;
-        private readonly IReader _reader;
+    public class ConsoleClient
+    {      
         private readonly IFinancialService _financialService;
         private readonly FinancialNoteConverter _financialNoteConverter;
         private const string MenuMessage = "If you want to add an income press 1\n" +

@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Client\Client.csproj" />
-      <ProjectReference Include="..\FinancialAnalyzer\FinancialAnalyzer.csproj" />
     </ItemGroup>
 
     <ItemGroup>
