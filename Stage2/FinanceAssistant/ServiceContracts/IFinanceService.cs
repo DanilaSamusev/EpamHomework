@@ -1,12 +1,12 @@
 ﻿using Models;
 using System.Collections.Generic;
 
-namespace ServicesContracts
+namespace ServiceContracts
 {
-    interface IFinanceService
+    public interface IFinanceService
     {
-        void AddExpenseNote(FinanceNote note);
-        void AddIncomeNote(FinanceNote note);
+        void AddExpenseNote(decimal financeAmount);
+        void AddIncomeNote(decimal financeAmount);
         IEnumerable<FinanceNote> GetAllFinanceNotes();
 
     }

@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace ConsoleInterface
+
+namespace ConsoleUserInterface
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var serviceProvider = Startup.ConfigureServices();
+            var ui = serviceProvider.GetService<UserInterface>();
+            ui.Run();
         }
     }
 }

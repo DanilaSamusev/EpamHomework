@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace ConsoleInterface
+namespace ConsoleUserInterface
 {
-    class Startup
+    public static class Startup
     {
+        public static ServiceProvider ConfigureServices()
+        {
+            var collection = new ServiceCollection();
+            collection.AddScoped<UserInterface>();
+            var serviceProvider = collection.BuildServiceProvider();
+            return serviceProvider;
+        }
     }
 }
