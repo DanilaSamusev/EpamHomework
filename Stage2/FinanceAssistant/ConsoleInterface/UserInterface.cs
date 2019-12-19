@@ -60,7 +60,7 @@ namespace ConsoleUserInterface
                 case (int)Operation.ShowIncomes:
                     {
                         Console.Write("Your incomes: ");
-                        var financialNotesDto = _financialService.GetAllIncomes();
+                        var financialNotesDto = _financeService.GetAllIncomes();
                         var table = _financialNoteConverter.ConvertFinancialNoteToStringTable(financialNotesDto);
                         _writer.Write(table);
                         break;
