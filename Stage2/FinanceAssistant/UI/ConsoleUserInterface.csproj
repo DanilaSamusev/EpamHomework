@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,10 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleReporter\Reporters.csproj" />
     <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj" />
+    <ProjectReference Include="..\Converters\Converters.csproj" />
+    <ProjectReference Include="..\Dal\Repositories.csproj" />
     <ProjectReference Include="..\Enums\Enums.csproj" />
+    <ProjectReference Include="..\FinanceAnalizer\FinanceAnalizer.csproj" />
     <ProjectReference Include="..\ReporterContracts\ReporterContracts.csproj" />
+    <ProjectReference Include="..\RepositoryContracts\RepositoryContracts.csproj" />
     <ProjectReference Include="..\ServiceContracts\ServiceContracts.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
 </Project>

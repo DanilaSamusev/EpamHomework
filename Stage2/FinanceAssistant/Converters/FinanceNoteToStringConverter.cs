@@ -17,7 +17,7 @@ namespace Converters
 
             foreach(var financeNote in financeNotes)
             {
-                stringTable += $"{financeNote.Id}. {financeNote.FinanceAmount}$ on {financeNote.CreationDate}";
+                stringTable += $"{financeNote.Id}. {financeNote.FinanceAmount}$ on {financeNote.CreationDate.ToString("dd.MM.yyyy")}\n";
             }
 
             return stringTable;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Services
 {
-    class FinanceService : IFinanceService
+    public class FinanceService : IFinanceService
     {
         private readonly IFinanceNoteRepository _finaceNoteRepository;
         private const decimal TaxRateInPercent = 13;
@@ -34,20 +34,7 @@ namespace Services
         public IEnumerable<FinanceNote> GetAllExpences()
         {
             return _finaceNoteRepository.GetAllExpences();
-        }      
-
-        public decimal GetTotalFinanceFlow()
-        {
-            decimal totalFlow = 0;
-            var notes = _finaceNoteRepository.GetAll();
-
-            foreach(var note in notes)
-            {
-                totalFlow += note.FinanceAmount;
-            }
-
-            return totalFlow;
-        }
+        }             
 
         private decimal WithdrawTaxes(decimal financeAmount)
         {

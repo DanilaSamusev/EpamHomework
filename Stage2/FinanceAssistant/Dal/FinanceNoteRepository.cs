@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Repositories
 {
-    class FinanceNoteRepository : IFinanceNoteRepository
+    public class FinanceNoteRepository : IFinanceNoteRepository
     {
 
         public void Add(decimal financeAmount)

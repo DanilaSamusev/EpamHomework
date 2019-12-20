@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Reporters
 {
-    class ConsoleReporter : IReporter
+    public class ConsoleReporter : IReporter
     {
         private readonly IFinanceNoteConverter _financeNoteConverter;
 

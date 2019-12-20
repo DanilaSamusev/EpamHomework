@@ -11,8 +11,6 @@ namespace ServiceContracts
 
         IEnumerable<FinanceNote> GetAllIncomes();
 
-        IEnumerable<FinanceNote> GetAllExpences();            
-
-        decimal GetTotalFinanceFlow();
+        IEnumerable<FinanceNote> GetAllExpences();                    
     }
 }

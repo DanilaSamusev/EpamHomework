@@ -3,9 +3,9 @@
 
 namespace ConsoleUserInterface
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var serviceProvider = Startup.ConfigureServices();
             var ui = serviceProvider.GetService<UserInterface>();
