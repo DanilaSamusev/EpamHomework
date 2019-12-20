@@ -5,7 +5,13 @@ namespace RepositoryContracts
 {
     public interface IFinanceNoteRepository
     {
-        void Add(FinanceNote note);
+
+        void Add(decimal financeAmount);
+
+        public IEnumerable<FinanceNote> GetAllExpences();
+
+        public IEnumerable<FinanceNote> GetAllIncomes();
+
         IEnumerable<FinanceNote> GetAll();
     }
 }

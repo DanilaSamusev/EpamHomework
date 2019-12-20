@@ -1,34 +1,57 @@
 ﻿using Models;
 using ServiceContracts;
+using RepositoryContracts;
 using System.Collections.Generic;
 
 namespace Services
 {
     class FinanceService : IFinanceService
     {
-        public void AddExpenseNote(decimal financeAmount)
+        private readonly IFinanceNoteRepository _finaceNoteRepository;
+        private const decimal TaxRateInPercent = 13;
+
+        public FinanceService(IFinanceNoteRepository finaceNoteRepository)
         {
-            throw new System.NotImplementedException();
+            _finaceNoteRepository = finaceNoteRepository;
+        }
+
+        public void AddExpenseNote(decimal financeAmount)
+        {            
+            _finaceNoteRepository.Add(-financeAmount);
         }
 
         public void AddIncomeNote(decimal financeAmount)
         {
-            throw new System.NotImplementedException();
+            financeAmount = WithdrawTaxes(financeAmount);
+            _finaceNoteRepository.Add(financeAmount);
         }
 
         public IEnumerable<FinanceNote> GetAllIncomes()
         {
-            return null;
+            return _finaceNoteRepository.GetAllIncomes();
         }
 
         public IEnumerable<FinanceNote> GetAllExpences()
         {
-            return null;
+            return _finaceNoteRepository.GetAllExpences();
+        }      
+
+        public decimal GetTotalFinanceFlow()
+        {
+            decimal totalFlow = 0;
+            var notes = _finaceNoteRepository.GetAll();
+
+            foreach(var note in notes)
+            {
+                totalFlow += note.FinanceAmount;
+            }
+
+            return totalFlow;
         }
 
-        public IEnumerable<FinanceNote> GetAllFinanceNotes()
+        private decimal WithdrawTaxes(decimal financeAmount)
         {
-            throw new System.NotImplementedException();
+            return financeAmount - (financeAmount / 100 * TaxRateInPercent);
         }
     }
 }

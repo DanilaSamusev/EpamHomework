@@ -9,11 +9,10 @@ namespace ServiceContracts
 
         void AddIncomeNote(decimal financeAmount);
 
-        public IEnumerable<FinanceNote> GetAllIncomes();
+        IEnumerable<FinanceNote> GetAllIncomes();
 
-        public IEnumerable<FinanceNote> GetAllExpences();
-        
-        IEnumerable<FinanceNote> GetAllFinanceNotes();
+        IEnumerable<FinanceNote> GetAllExpences();            
 
+        decimal GetTotalFinanceFlow();
     }
 }

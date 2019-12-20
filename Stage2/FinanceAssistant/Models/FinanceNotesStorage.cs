@@ -2,9 +2,9 @@
 
 namespace Models
 {
-    public static class FinanceNotesStorage
+    public class FinanceNotesStorage
     {
-        public static IEnumerable<FinanceNote> FinanceNotes;
+        public static List<FinanceNote> FinanceNotes;
 
         static FinanceNotesStorage()
         {

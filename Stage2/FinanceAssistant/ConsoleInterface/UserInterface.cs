@@ -8,7 +8,7 @@ namespace ConsoleUserInterface
     public class UserInterface
     {
         private readonly IFinanceService _financeService;
-        private readonly IReporter _reporter;
+        private readonly IReporter _reporter;       
         private const string AddingIsSuccessful = "Data has been added.";
         private const string MenuMessage = "To add an income press 1\n" +
                                            "To add an expense press 2\n" +
@@ -19,8 +19,8 @@ namespace ConsoleUserInterface
 
         public UserInterface(IFinanceService financeService, IReporter reporter)
         {
-            _financeService = financeService;
-            _reporter = reporter;
+            _financeService = financeService;         
+            _reporter = reporter;           
         }
 
         public void Run()
@@ -59,25 +59,23 @@ namespace ConsoleUserInterface
                     }
                 case (int)Operation.ShowIncomes:
                     {
-                        Console.Write("Your incomes: ");
-                        var financialNotesDto = _financeService.GetAllIncomes();
-                        var table = _financialNoteConverter.ConvertFinancialNoteToStringTable(financialNotesDto);
-                        _writer.Write(table);
+                        Console.WriteLine("Your incomes:");
+                        var financeNotes = _financeService.GetAllIncomes();                       
+                        _reporter.SaveReport(financeNotes);
                         break;
                     }
                 case (int)Operation.ShowExpenses:
                     {
-                        _writer.Write("Your expenses:");
-                        var financialNotesDto = _financialService.GetAllExpenses();
-                        var table = _financialNoteConverter.ConvertFinancialNoteToStringTable(financialNotesDto);
-                        _writer.Write(table);
+                        Console.WriteLine("Your expenses:");
+                        var financeNotes = _financeService.GetAllExpences();
+                        _reporter.SaveReport(financeNotes);
                         break;
                     }
                 case (int)Operation.ShowTotalFinancialFlow:
                     {
-                        _writer.Write("Your financial flow:");
-                        var totalFinancialFlow = _financialService.GetTotalFinancialFlow();
-                        _writer.Write(totalFinancialFlow.ToString());
+                        Console.Write("Your financial flow: ");
+                        var totalFinancialFlow = _financeService.GetTotalFinanceFlow();
+                        Console.WriteLine($"{totalFinancialFlow}$");
                         break;
                     }
             }
