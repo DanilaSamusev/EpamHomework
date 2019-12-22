@@ -12,7 +12,6 @@ namespace ConsoleUserInterface
         private readonly IReporter _reporter;
         private readonly FinanceAnalyzer _financeFlowAnalyzer;
         private const string AddingIsSuccessful = "Data has been added.";
-
         private const string MenuMessage = "To add an income press 1\n" +
                                            "To add an expense press 2\n" +
                                            "To see all your incomes press 3\n" +
