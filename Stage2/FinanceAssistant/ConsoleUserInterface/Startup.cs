@@ -29,7 +29,7 @@ namespace ConsoleUserInterface
         private static ServiceProvider ConfigureServices()
         {
             var collection = new ServiceCollection();
-            var connectionString = AppConfiguration.GetSection("ConnectionStrings:ConnectionString").Value;
+            var connectionString = AppConfiguration.GetSection("ConnectionStrings:PathToReport").Value;
             collection.AddScoped<UserInterface>();
             collection.AddScoped<FinanceAnalyzer>();
             collection.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
