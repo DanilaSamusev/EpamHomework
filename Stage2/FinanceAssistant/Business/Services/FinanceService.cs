@@ -7,33 +7,33 @@ namespace Business.Services
 {
     public class FinanceService : IFinanceService
     {
-        private readonly IFinanceNoteRepository _finaceNoteRepository;
+        private readonly IFinanceNoteRepository _financeNoteRepository;
         private const decimal TaxRateInPercent = 13;
 
-        public FinanceService(IFinanceNoteRepository finaceNoteRepository)
+        public FinanceService(IFinanceNoteRepository financeNoteRepository)
         {
-            _finaceNoteRepository = finaceNoteRepository;
+            _financeNoteRepository = financeNoteRepository;
         }
 
         public void AddExpenseNote(decimal financeAmount)
         {            
-            _finaceNoteRepository.Add(-financeAmount);
+            _financeNoteRepository.Add(-financeAmount);
         }
 
         public void AddIncomeNote(decimal financeAmount)
         {
             financeAmount = WithdrawTaxes(financeAmount);
-            _finaceNoteRepository.Add(financeAmount);
+            _financeNoteRepository.Add(financeAmount);
         }
 
         public IEnumerable<FinanceNote> GetAllIncomes()
         {
-            return _finaceNoteRepository.GetAllIncomes();
+            return _financeNoteRepository.GetAllIncomes();
         }
 
         public IEnumerable<FinanceNote> GetAllExpenses()
         {
-            return _finaceNoteRepository.GetAllExpenses();
+            return _financeNoteRepository.GetAllExpenses();
         }             
 
         private decimal WithdrawTaxes(decimal financeAmount)
