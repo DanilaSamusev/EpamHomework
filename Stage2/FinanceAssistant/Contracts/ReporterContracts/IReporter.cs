@@ -5,6 +5,6 @@ namespace Contracts.ReporterContracts
 {
     public interface IReporter
     {
-        void SaveReport(IEnumerable<FinanceNote> notes);      
+        void SaveReport(IEnumerable<FinanceNote> notes, string reportTitle);      
     }
 }

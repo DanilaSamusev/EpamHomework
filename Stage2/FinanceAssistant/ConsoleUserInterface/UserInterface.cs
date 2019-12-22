@@ -66,16 +66,14 @@ namespace ConsoleUserInterface
                 }
                 case (double) Operation.ShowIncomes:
                 {
-                    Console.WriteLine("Your incomes:");
                     var financeNotes = _financeService.GetAllIncomes();
-                    _reporter.SaveReport(financeNotes);
+                    _reporter.SaveReport(financeNotes, "Your incomes: ");
                     break;
                 }
                 case (double) Operation.ShowExpenses:
                 {
-                    Console.WriteLine("Your expenses:");
                     var financeNotes = _financeService.GetAllExpenses();
-                    _reporter.SaveReport(financeNotes);
+                    _reporter.SaveReport(financeNotes, "Your expenses: ");
                     break;
                 }
                 case (double) Operation.ShowTotalFinancialFlow:

@@ -15,11 +15,11 @@ namespace Business.FinanceReporters
             _financeNoteConverter = financeNoteConverter;
         }
 
-        public void SaveReport(IEnumerable<FinanceNote> notes)
+        public void SaveReport(IEnumerable<FinanceNote> notes, string reportTitle)
         {
             var table = _financeNoteConverter.ConvertFinanceNotesToTable(notes);
 
-            Console.WriteLine(table);
+            Console.WriteLine($"{reportTitle}\n{table}");
         }
     }
 }

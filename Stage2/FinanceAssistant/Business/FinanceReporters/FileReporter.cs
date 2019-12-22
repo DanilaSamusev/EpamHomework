@@ -17,12 +17,12 @@ namespace Business.FinanceReporters
             _financeNoteConverter = financeNoteConverter;
         }
         
-        public void SaveReport(IEnumerable<FinanceNote> notes)
+        public void SaveReport(IEnumerable<FinanceNote> notes, string reportTitle)
         {
-            using (var file = new StreamWriter(_filePath, false, System.Text.Encoding.Default))
+            using (var writer = new StreamWriter(_filePath, false, System.Text.Encoding.Default))
             {
                 var table = _financeNoteConverter.ConvertFinanceNotesToTable(notes);
-                file.WriteLine(table);
+                writer.WriteLine($"{reportTitle}\n{table}");
             }
         }
     }
