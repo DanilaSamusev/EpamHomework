@@ -19,7 +19,7 @@ namespace ConsoleUserInterface
         public static UserInterface Build()
         {
             var builder = new ConfigurationBuilder().AddJsonFile(
-                "F:\\MyWorks\\Epam\\Solutions\\Stage2\\FinanceAssistant\\ConsoleUserInterface\\appsettings.json");
+                "appsettings.json");
             AppConfiguration = builder.Build();
 
             var serviceProvider = ConfigureServices();
