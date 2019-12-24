@@ -8,11 +8,13 @@ namespace DataAccess
 {
     public class FinanceNoteRepository : IFinanceNoteRepository
     {
+        public static readonly List<FinanceNote> FinanceNotes = new List<FinanceNote>();
+       
         public void Add(decimal financeAmount)
         {
-            var id = FinanceNotesStorage.FinanceNotes.Count;
+            var id = FinanceNotes.Count;
             var note = new FinanceNote(id,financeAmount, DateTime.Now);
-            FinanceNotesStorage.FinanceNotes.Add(note);
+            FinanceNotes.Add(note);
         }
 
         public IEnumerable<FinanceNote> GetAllExpenses()
@@ -27,7 +29,7 @@ namespace DataAccess
 
         public IEnumerable<FinanceNote> GetAll()
         {
-            return FinanceNotesStorage.FinanceNotes;
+            return FinanceNotes;
         }
     }
 }
