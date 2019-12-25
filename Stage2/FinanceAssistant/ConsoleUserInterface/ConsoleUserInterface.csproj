@@ -19,7 +19,9 @@
 
     <ItemGroup>
       <Content Include="bin\Debug\netcoreapp3.0\appsettings.json" />
-      <Content Include="bin\Debug\netcoreapp3.0\FinanceReport.txt" />
+      <Content Include="bin\Debug\netcoreapp3.0\FinanceNotesInJson.json" />
+      <Content Include="bin\Debug\netcoreapp3.0\FinanceTxtReport.txt" />
+      <Content Include="bin\Debug\netcoreapp3.0\FinaneTxtReport.txt" />
     </ItemGroup>
 
 </Project>

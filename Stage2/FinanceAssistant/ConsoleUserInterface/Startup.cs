@@ -21,7 +21,6 @@ namespace ConsoleUserInterface
             var builder = new ConfigurationBuilder().AddJsonFile(
                 "appsettings.json");
             AppConfiguration = builder.Build();
-
             var serviceProvider = ConfigureServices();
 
             return serviceProvider.GetService<UserInterface>();
@@ -31,6 +30,7 @@ namespace ConsoleUserInterface
         {
             var collection = new ServiceCollection();
             var pathToReport = AppConfiguration.GetSection("ConnectionStrings:PathToReport").Value;
+            var connectionString = AppConfiguration.GetSection("ConnectionStrings:PathToNotes").Value;
             collection.AddScoped<UserInterface>();
             collection.AddScoped<FinanceAnalyzer>();
             collection.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
@@ -38,7 +38,8 @@ namespace ConsoleUserInterface
             collection.AddScoped<IReporter, FileReporter>(fr =>
                 new FileReporter(pathToReport, new FinanceNoteToStringConverter()));
             collection.AddScoped<IFinanceService, FinanceService>();
-            collection.AddScoped<IFinanceNoteRepository, FinanceNoteRepository>();
+            collection.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
+                new FinanceNoteJsonRepository(connectionString));
             var serviceProvider = collection.BuildServiceProvider();
 
             return serviceProvider;

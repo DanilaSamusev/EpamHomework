@@ -4,15 +4,9 @@ namespace Contracts.Models
 {
     public class FinanceNote
     {
-        public int Id { get; }
-        public decimal FinanceAmount { get; }
-        public DateTime CreationDate { get; }
+        public decimal FinanceAmount { get; set;}
+        public DateTime CreationDate { get; set;}
 
-        public FinanceNote(int id, decimal financeAmount, DateTime creationDate)
-        {
-            Id = id;
-            FinanceAmount = financeAmount;
-            CreationDate = creationDate;
-        }
+        
     }
 }

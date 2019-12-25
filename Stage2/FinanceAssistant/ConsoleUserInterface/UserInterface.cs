@@ -90,11 +90,11 @@ namespace ConsoleUserInterface
         {
             Console.Write("Enter finance amount: ");
             Console.WriteLine();
-            var numberIsParsed = decimal.TryParse(Console.ReadLine(), out decimal parsedFinanceAnount);
+            var numberIsParsed = decimal.TryParse(Console.ReadLine(), out decimal parsedFinanceAmount);
 
             if (numberIsParsed)
             {
-                return parsedFinanceAnount;
+                return parsedFinanceAmount;
             }
 
             throw new ArgumentException("Error! Enter a positive number");

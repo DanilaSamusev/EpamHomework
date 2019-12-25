@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Contracts.Models;
 using Contracts.RepositoryContracts;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using Contracts.Models;
 
 namespace DataAccess
 {
-    public class FinanceNoteRepository : IFinanceNoteRepository
+    public class FinanceNoteJsonRepository : IFinanceNoteRepository
     {
-        private static readonly List<FinanceNote> FinanceNotes = new List<FinanceNote>();
-       
+        private readonly string _connectionString;
+
+        public FinanceNoteJsonRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public void Add(decimal financeAmount)
         {
             var note = new FinanceNote
@@ -17,7 +24,10 @@ namespace DataAccess
                 CreationDate = new DateTime(),
                 FinanceAmount = financeAmount,
             };
-            FinanceNotes.Add(note);
+            
+            var financeNotes = GetAll().ToList();
+            financeNotes.Add(note);
+            File.WriteAllText(_connectionString, JsonSerializer.Serialize(financeNotes));
         }
 
         public IEnumerable<FinanceNote> GetAllExpenses()
@@ -32,7 +42,9 @@ namespace DataAccess
 
         public IEnumerable<FinanceNote> GetAll()
         {
-            return FinanceNotes;
+            var notes = File.ReadAllText(_connectionString);
+            
+            return JsonSerializer.Deserialize<List<FinanceNote>>(notes);;
         }
     }
 }

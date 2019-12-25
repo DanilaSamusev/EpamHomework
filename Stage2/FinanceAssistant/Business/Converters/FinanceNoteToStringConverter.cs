@@ -18,7 +18,7 @@ namespace Business.Converters
             foreach (var financeNote in financeNotes)
             {
                 stringTable +=
-                    $"{financeNote.Id}. {financeNote.FinanceAmount}$ on {financeNote.CreationDate:dd.MM.yyyy}\n";
+                    $"{financeNote.FinanceAmount}$ on {financeNote.CreationDate:dd.MM.yyyy}\n";
             }
 
             return stringTable;
