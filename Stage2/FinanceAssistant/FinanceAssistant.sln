@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{3345F6C5-71C4-4AFA-BB51-1E2FBB839E05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{3345F6C5-71C4-4AFA-BB51-1E2FBB839E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{695684F5-780D-4D72-B63F-7656743F49CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{695684F5-780D-4D72-B63F-7656743F49CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{419A1829-77C8-4F3F-8C65-2F71ACBCB18D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{419A1829-77C8-4F3F-8C65-2F71ACBCB18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUserInterface", "ConsoleUserInterface\ConsoleUserInterface.csproj", "{5165DF4A-5A5B-45FA-B485-4B8D97D6F1A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUserInterface", "ConsoleUserInterface\ConsoleUserInterface.csproj", "{5165DF4A-5A5B-45FA-B485-4B8D97D6F1A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceAssistant.WebApi", "FinanceAssistant.WebApi\FinanceAssistant.WebApi.csproj", "{FAAEB01C-F190-4AC3-9399-FF483AD52858}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +35,13 @@ Global
 		{5165DF4A-5A5B-45FA-B485-4B8D97D6F1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5165DF4A-5A5B-45FA-B485-4B8D97D6F1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5165DF4A-5A5B-45FA-B485-4B8D97D6F1A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAAEB01C-F190-4AC3-9399-FF483AD52858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAAEB01C-F190-4AC3-9399-FF483AD52858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAAEB01C-F190-4AC3-9399-FF483AD52858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAAEB01C-F190-4AC3-9399-FF483AD52858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {878EEB92-B564-4ABE-A0E1-C1490FE65D2F}

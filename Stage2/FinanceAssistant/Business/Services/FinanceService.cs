@@ -34,7 +34,12 @@ namespace Business.Services
         public IEnumerable<FinanceNote> GetAllExpenses()
         {
             return _financeNoteRepository.GetAllExpenses();
-        }             
+        }
+
+        public IEnumerable<FinanceNote> GetAllNotes()
+        {
+            return _financeNoteRepository.GetAll();
+        }
 
         private decimal WithdrawTaxes(decimal financeAmount)
         {

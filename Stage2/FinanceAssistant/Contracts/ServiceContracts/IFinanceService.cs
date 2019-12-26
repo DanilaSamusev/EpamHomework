@@ -12,5 +12,7 @@ namespace Contracts.ServiceContracts
         IEnumerable<FinanceNote> GetAllIncomes();
 
         IEnumerable<FinanceNote> GetAllExpenses();
+
+        IEnumerable<FinanceNote> GetAllNotes();
     }
 }

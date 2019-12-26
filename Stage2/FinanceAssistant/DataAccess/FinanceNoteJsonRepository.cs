@@ -42,6 +42,7 @@ namespace DataAccess
 
         public IEnumerable<FinanceNote> GetAll()
         {
+            
             var notes = File.ReadAllText(_connectionString);
             
             return JsonSerializer.Deserialize<List<FinanceNote>>(notes);;
