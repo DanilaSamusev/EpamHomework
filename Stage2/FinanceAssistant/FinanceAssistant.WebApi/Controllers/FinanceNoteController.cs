@@ -27,6 +27,46 @@ namespace FinanceAssistant.WebApi.Controllers
             return Ok(notes);
         }
 
-        
+        [HttpDelete("incomes")]
+        public IActionResult GetIncomes()
+        {
+            var notes = _financeService.GetAllIncomes();
+
+            if (notes == null)
+            {
+                return BadRequest("You have't any notes!");
+            }
+
+            return Ok(notes);
+        }
+
+        [HttpDelete("expenses")]
+        public IActionResult GetExpenses()
+        {
+            var notes = _financeService.GetAllExpenses();
+
+            if (notes == null)
+            {
+                return BadRequest("You have't any notes!");
+            }
+
+            return Ok(notes);
+        }
+
+        [HttpPost("income")]
+        public IActionResult AddIncome([FromBody]decimal financeAmount)
+        {
+            _financeService.AddIncomeNote(financeAmount);
+
+            return Ok("Note successfully added");
+        }
+
+        [HttpPost("expense")]
+        public IActionResult AddExpense([FromBody]decimal financeAmount)
+        {
+            _financeService.AddExpenseNote(financeAmount);
+
+            return Ok("Note successfully added");
+        }
     }
 }
