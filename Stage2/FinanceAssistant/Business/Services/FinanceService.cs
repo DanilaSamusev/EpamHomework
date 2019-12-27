@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Contracts.Models;
 using Contracts.RepositoryContracts;
 using Contracts.ServiceContracts;
@@ -16,14 +17,27 @@ namespace Business.Services
         }
 
         public void AddExpenseNote(decimal financeAmount)
-        {            
-            _financeNoteRepository.Add(-financeAmount);
+        {
+            var note = new FinanceNote
+            {
+                CreationDate = DateTime.Now,
+                FinanceAmount = -financeAmount,
+            };
+
+            _financeNoteRepository.Add(note);
         }
 
         public void AddIncomeNote(decimal financeAmount)
         {
             financeAmount = WithdrawTaxes(financeAmount);
-            _financeNoteRepository.Add(financeAmount);
+
+            var note = new FinanceNote
+            {
+                CreationDate = DateTime.Now,
+                FinanceAmount = -financeAmount,
+            };
+
+            _financeNoteRepository.Add(note);
         }
 
         public IEnumerable<FinanceNote> GetAllIncomes()

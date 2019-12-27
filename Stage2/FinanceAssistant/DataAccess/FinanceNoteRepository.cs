@@ -10,13 +10,8 @@ namespace DataAccess
     {
         private static readonly List<FinanceNote> FinanceNotes = new List<FinanceNote>();
        
-        public void Add(decimal financeAmount)
-        {
-            var note = new FinanceNote
-            {
-                CreationDate = new DateTime(),
-                FinanceAmount = financeAmount,
-            };
+        public void Add(FinanceNote note)
+        {          
             FinanceNotes.Add(note);
         }
 

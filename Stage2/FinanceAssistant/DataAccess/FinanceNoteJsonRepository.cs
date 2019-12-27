@@ -17,14 +17,8 @@ namespace DataAccess
             _connectionString = connectionString;
         }
 
-        public void Add(decimal financeAmount)
-        {
-            var note = new FinanceNote
-            {
-                CreationDate = DateTime.Now,
-                FinanceAmount = financeAmount,
-            };
-            
+        public void Add(FinanceNote note)
+        {                
             var financeNotes = GetAll().ToList();
             financeNotes.Add(note);
             File.WriteAllText(_connectionString, JsonSerializer.Serialize(financeNotes));
@@ -41,8 +35,7 @@ namespace DataAccess
         }
 
         public IEnumerable<FinanceNote> GetAll()
-        {
-            
+        {           
             var notes = File.ReadAllText(_connectionString);
             
             return JsonSerializer.Deserialize<List<FinanceNote>>(notes);;
