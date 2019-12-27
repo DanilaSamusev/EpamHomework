@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Business.Converters;
 using Business.FinanceAnalyzer;
 using Business.FinanceReporters;
@@ -14,10 +10,10 @@ using Contracts.ServiceContracts;
 using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace FinanceAssistant.WebApi
 {
@@ -43,6 +39,11 @@ namespace FinanceAssistant.WebApi
             services.AddScoped<IFinanceService, FinanceService>();
             services.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
                 new FinanceNoteJsonRepository(connectionString));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
         }
        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,6 +52,13 @@ namespace FinanceAssistant.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();           
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
