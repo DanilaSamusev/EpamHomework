@@ -21,7 +21,7 @@ namespace DataAccess
         {
             var note = new FinanceNote
             {
-                CreationDate = new DateTime(),
+                CreationDate = DateTime.Now,
                 FinanceAmount = financeAmount,
             };
             

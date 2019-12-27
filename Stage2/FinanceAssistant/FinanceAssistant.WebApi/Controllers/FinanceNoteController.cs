@@ -27,7 +27,7 @@ namespace FinanceAssistant.WebApi.Controllers
             return Ok(notes);
         }
 
-        [HttpDelete("incomes")]
+        [HttpGet("incomes")]
         public IActionResult GetIncomes()
         {
             var notes = _financeService.GetAllIncomes();
@@ -40,7 +40,7 @@ namespace FinanceAssistant.WebApi.Controllers
             return Ok(notes);
         }
 
-        [HttpDelete("expenses")]
+        [HttpGet("expenses")]
         public IActionResult GetExpenses()
         {
             var notes = _financeService.GetAllExpenses();
@@ -54,7 +54,7 @@ namespace FinanceAssistant.WebApi.Controllers
         }
 
         [HttpPost("income")]
-        public IActionResult AddIncome([FromBody]decimal financeAmount)
+        public IActionResult AddIncome([FromQuery]decimal financeAmount)
         {
             _financeService.AddIncomeNote(financeAmount);
 
@@ -62,7 +62,7 @@ namespace FinanceAssistant.WebApi.Controllers
         }
 
         [HttpPost("expense")]
-        public IActionResult AddExpense([FromBody]decimal financeAmount)
+        public IActionResult AddExpense([FromQuery]decimal financeAmount)
         {
             _financeService.AddExpenseNote(financeAmount);
 
