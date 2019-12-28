@@ -7,21 +7,23 @@ namespace FinanceAssistant.WebApi.Controllers
     [ApiController]
     public class FinanceNoteController : ControllerBase
     {
-        private readonly IFinanceService _financeService;
+        private readonly IFinanceNoteService _financeNoteService;
+        private const string NotesErrorMessage = "You haven't any notes!";
+        private const string NoteAddingSuccessMessage = "Note successfully added";
 
-        public FinanceNoteController(IFinanceService financeService)
+        public FinanceNoteController(IFinanceNoteService financeNoteService)
         {
-            _financeService = financeService;
+            _financeNoteService = financeNoteService;
         }
 
         [HttpGet]
         public IActionResult GetAllNotes()
         {
-            var notes = _financeService.GetAllNotes();
+            var notes = _financeNoteService.GetAllNotes();
 
             if (notes == null)
             {
-                return BadRequest("You have't any notes!");
+                return BadRequest(NotesErrorMessage);
             }
 
             return Ok(notes);
@@ -30,11 +32,11 @@ namespace FinanceAssistant.WebApi.Controllers
         [HttpGet("incomes")]
         public IActionResult GetIncomes()
         {
-            var notes = _financeService.GetAllIncomes();
+            var notes = _financeNoteService.GetAllIncomes();
 
             if (notes == null)
             {
-                return BadRequest("You have't any notes!");
+                return BadRequest(NotesErrorMessage);
             }
 
             return Ok(notes);
@@ -43,11 +45,11 @@ namespace FinanceAssistant.WebApi.Controllers
         [HttpGet("expenses")]
         public IActionResult GetExpenses()
         {
-            var notes = _financeService.GetAllExpenses();
+            var notes = _financeNoteService.GetAllExpenses();
 
             if (notes == null)
             {
-                return BadRequest("You have't any notes!");
+                return BadRequest(NotesErrorMessage);
             }
 
             return Ok(notes);
@@ -56,17 +58,17 @@ namespace FinanceAssistant.WebApi.Controllers
         [HttpPost("income")]
         public IActionResult AddIncome([FromQuery]decimal financeAmount)
         {
-            _financeService.AddIncomeNote(financeAmount);
+            _financeNoteService.AddIncomeNote(financeAmount);
 
-            return Ok("Note successfully added");
+            return Ok(NoteAddingSuccessMessage);
         }
 
         [HttpPost("expense")]
         public IActionResult AddExpense([FromQuery]decimal financeAmount)
         {
-            _financeService.AddExpenseNote(financeAmount);
+            _financeNoteService.AddExpenseNote(financeAmount);
 
-            return Ok("Note successfully added");
+            return Ok(NoteAddingSuccessMessage);
         }
     }
 }

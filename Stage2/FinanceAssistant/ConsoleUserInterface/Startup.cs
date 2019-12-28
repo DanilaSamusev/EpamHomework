@@ -37,7 +37,7 @@ namespace ConsoleUserInterface
             collection.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
             collection.AddScoped<IReporter, FileReporter>(fr =>
                 new FileReporter(pathToReport, new FinanceNoteToStringConverter()));
-            collection.AddScoped<IFinanceService, FinanceService>();
+            collection.AddScoped<IFinanceNoteService, FinanceNoteNoteService>();
             collection.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
                 new FinanceNoteJsonRepository(connectionString));
             var serviceProvider = collection.BuildServiceProvider();

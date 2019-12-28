@@ -33,10 +33,9 @@ namespace FinanceAssistant.WebApi
             services.AddScoped<UserInterface>();
             services.AddScoped<FinanceAnalyzer>();
             services.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
-            services.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
             services.AddScoped<IReporter, FileReporter>(fr =>
                 new FileReporter(pathToReport, new FinanceNoteToStringConverter()));
-            services.AddScoped<IFinanceService, FinanceService>();
+            services.AddScoped<IFinanceNoteService, FinanceNoteNoteService>();
             services.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
                 new FinanceNoteJsonRepository(connectionString));
 

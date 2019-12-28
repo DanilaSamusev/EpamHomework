@@ -6,12 +6,12 @@ using Contracts.ServiceContracts;
 
 namespace Business.Services
 {
-    public class FinanceService : IFinanceService
+    public class FinanceNoteNoteService : IFinanceNoteService
     {
         private readonly IFinanceNoteRepository _financeNoteRepository;
         private const decimal TaxRateInPercent = 13;
 
-        public FinanceService(IFinanceNoteRepository financeNoteRepository)
+        public FinanceNoteNoteService(IFinanceNoteRepository financeNoteRepository)
         {
             _financeNoteRepository = financeNoteRepository;
         }

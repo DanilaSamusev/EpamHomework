@@ -3,7 +3,7 @@ using Contracts.Models;
 
 namespace Contracts.ServiceContracts
 {
-    public interface IFinanceService
+    public interface IFinanceNoteService
     {
         void AddExpenseNote(decimal financeAmount);
 

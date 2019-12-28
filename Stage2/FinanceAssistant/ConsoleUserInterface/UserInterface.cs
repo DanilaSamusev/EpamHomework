@@ -8,7 +8,7 @@ namespace ConsoleUserInterface
 {
     public class UserInterface
     {
-        private readonly IFinanceService _financeService;
+        private readonly IFinanceNoteService _financeNoteService;
         private readonly IReporter _reporter;
         private readonly FinanceAnalyzer _financeFlowAnalyzer;
         private const string AddingIsSuccessful = "Data has been added.";
@@ -19,10 +19,10 @@ namespace ConsoleUserInterface
                                            "To see your total financial flow press 5\n" +
                                            "To finish session press 6\n";
 
-        public UserInterface(IFinanceService financeService, IReporter reporter,
+        public UserInterface(IFinanceNoteService financeNoteService, IReporter reporter,
             FinanceAnalyzer financeFlowAnalyzer)
         {
-            _financeService = financeService;
+            _financeNoteService = financeNoteService;
             _reporter = reporter;
             _financeFlowAnalyzer = financeFlowAnalyzer;
         }
@@ -53,26 +53,26 @@ namespace ConsoleUserInterface
                 case (double) Operation.AddIncome:
                 {
                     var financeAmount = GetFinanceAmount();
-                    _financeService.AddIncomeNote(financeAmount);
+                    _financeNoteService.AddIncomeNote(financeAmount);
                     Console.WriteLine(AddingIsSuccessful);
                     break;
                 }
                 case (double) Operation.AddExpense:
                 {
                     var financeAmount = GetFinanceAmount();
-                    _financeService.AddExpenseNote(financeAmount);
+                    _financeNoteService.AddExpenseNote(financeAmount);
                     Console.WriteLine(AddingIsSuccessful);
                     break;
                 }
                 case (double) Operation.ShowIncomes:
                 {
-                    var financeNotes = _financeService.GetAllIncomes();
+                    var financeNotes = _financeNoteService.GetAllIncomes();
                     _reporter.SaveReport(financeNotes, "Your incomes: ");
                     break;
                 }
                 case (double) Operation.ShowExpenses:
                 {
-                    var financeNotes = _financeService.GetAllExpenses();
+                    var financeNotes = _financeNoteService.GetAllExpenses();
                     _reporter.SaveReport(financeNotes, "Your expenses: ");
                     break;
                 }
