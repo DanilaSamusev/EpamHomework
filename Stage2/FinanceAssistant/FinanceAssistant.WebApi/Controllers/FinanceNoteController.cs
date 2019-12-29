@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceAssistant.WebApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class FinanceNoteController : ControllerBase
     {
         private readonly IFinanceNoteService _financeNoteService;
-        private const string NotesErrorMessage = "You haven't any notes!";
-        private const string NoteAddingSuccessMessage = "Note successfully added";
 
         public FinanceNoteController(IFinanceNoteService financeNoteService)
         {
@@ -23,33 +21,39 @@ namespace FinanceAssistant.WebApi.Controllers
 
             if (notes == null)
             {
-                return BadRequest(NotesErrorMessage);
+                return BadRequest();
             }
 
             return Ok(notes);
         }
 
+        [HttpGet]
+        public IActionResult GetAllNotes(int userId)
+        {
+            return Ok();
+        }
+
         [HttpGet("incomes")]
-        public IActionResult GetIncomes()
+        public IActionResult GetIncomes(int userId)
         {
             var notes = _financeNoteService.GetAllIncomes();
 
             if (notes == null)
             {
-                return BadRequest(NotesErrorMessage);
+                return BadRequest();
             }
 
             return Ok(notes);
         }
 
         [HttpGet("expenses")]
-        public IActionResult GetExpenses()
+        public IActionResult GetExpenses(int userId)
         {
             var notes = _financeNoteService.GetAllExpenses();
 
             if (notes == null)
             {
-                return BadRequest(NotesErrorMessage);
+                return BadRequest();
             }
 
             return Ok(notes);
@@ -60,7 +64,7 @@ namespace FinanceAssistant.WebApi.Controllers
         {
             _financeNoteService.AddIncomeNote(financeAmount);
 
-            return Ok(NoteAddingSuccessMessage);
+            return Ok();
         }
 
         [HttpPost("expense")]
@@ -68,7 +72,12 @@ namespace FinanceAssistant.WebApi.Controllers
         {
             _financeNoteService.AddExpenseNote(financeAmount);
 
-            return Ok(NoteAddingSuccessMessage);
+            return Ok();
+        }
+
+        public IActionResult UpdateNote(int noteId)
+        {
+            return Ok();
         }
     }
 }
