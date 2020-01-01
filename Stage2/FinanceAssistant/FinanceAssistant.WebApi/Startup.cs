@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Business.Converters;
 using Business.FinanceAnalyzer;
 using Business.FinanceReporters;
@@ -25,11 +27,12 @@ namespace FinanceAssistant.WebApi
         {
             var builder = new ConfigurationBuilder().AddJsonFile(
                 "appsettings.json");
-            AppConfiguration = builder.Build();          
+            AppConfiguration = builder.Build();
             var pathToReport = AppConfiguration.GetSection("ConnectionStrings:PathToReport").Value;
             var connectionString = AppConfiguration.GetSection("ConnectionStrings:PathToNotes").Value;
 
             services.AddControllers();
+
             services.AddScoped<UserInterface>();
             services.AddScoped<FinanceAnalyzer>();
             services.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
@@ -39,12 +42,20 @@ namespace FinanceAssistant.WebApi
             services.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
                 new FinanceNoteJsonRepository(connectionString));
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"});
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description =
+                        "Please enter into field the word 'Bearer' following by space and JWT",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                });
             });
         }
-       
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -52,7 +63,7 @@ namespace FinanceAssistant.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();           
+            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FinanceAssistant.Api");
@@ -61,12 +72,9 @@ namespace FinanceAssistant.WebApi
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();          
+            app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

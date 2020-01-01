@@ -15,7 +15,7 @@ namespace FinanceAssistant.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllNotes()
+        public IActionResult GetAllNotes(int userId)
         {
             var notes = _financeNoteService.GetAllNotes();
 
@@ -25,12 +25,6 @@ namespace FinanceAssistant.WebApi.Controllers
             }
 
             return Ok(notes);
-        }
-
-        [HttpGet]
-        public IActionResult GetAllNotes(int userId)
-        {
-            return Ok();
         }
 
         [HttpGet("incomes")]
@@ -75,6 +69,7 @@ namespace FinanceAssistant.WebApi.Controllers
             return Ok();
         }
 
+        [HttpPost]
         public IActionResult UpdateNote(int noteId)
         {
             return Ok();
