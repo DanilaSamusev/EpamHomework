@@ -28,5 +28,10 @@ namespace DataAccess
         {
             return FinanceNotes;
         }
+
+        public FinanceNote GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

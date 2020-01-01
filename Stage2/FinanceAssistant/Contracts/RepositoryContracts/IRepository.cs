@@ -7,5 +7,7 @@ namespace Contracts.RepositoryContracts
         void Add(T obj);
         
         IEnumerable<T> GetAll();
+
+        T GetById(int id);
     }
 }

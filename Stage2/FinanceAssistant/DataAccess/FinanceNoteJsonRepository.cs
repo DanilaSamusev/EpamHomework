@@ -39,5 +39,10 @@ namespace DataAccess
             
             return JsonSerializer.Deserialize<List<FinanceNote>>(notes);;
         }
+
+        public FinanceNote GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
