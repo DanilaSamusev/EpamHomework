@@ -37,7 +37,7 @@ namespace DataAccess
         {           
             var notes = File.ReadAllText(_connectionString);
             
-            return JsonSerializer.Deserialize<List<FinanceNote>>(notes);;
+            return JsonSerializer.Deserialize<List<FinanceNote>>(notes);
         }
 
         public FinanceNote GetById(int id)

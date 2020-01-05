@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using Authentication;
-using Contracts.Models;
+﻿using Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace FinanceAssistant.WebApi.Controllers
 {
@@ -14,60 +7,25 @@ namespace FinanceAssistant.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private List<User> users = new List<User>
+        private readonly TokenProvider _tokenProvider;
+        
+        public AccountController(TokenProvider tokenProvider)
         {
-            new User {Name = "admin", Password = "12345", Role = "admin"},
-            new User {Name = "user", Password = "55555", Role = "user"}
-        };
-
+            _tokenProvider = tokenProvider;
+        }
+        
         [HttpPost("token")]
-        public IActionResult Token([FromQuery]string username)
+        public IActionResult GetToken([FromQuery]string password)
         {
-            var identity = GetIdentity(username);
-            if (identity == null)
+            var token = _tokenProvider.ProvideToken(password);
+
+            if (string.IsNullOrEmpty(token))
             {
-                return BadRequest(new {errorText = "Invalid username or password."});
+                return BadRequest("Check input data!");
             }
-
-            var time = DateTime.UtcNow;
-           
-            var jwt = new JwtSecurityToken(
-                issuer: AuthenticationOptions.Issuer,
-                audience: AuthenticationOptions.Audience,
-                notBefore: time,
-                claims: identity.Claims,
-                expires: time.Add(TimeSpan.FromMinutes(AuthenticationOptions.Lifetime)),
-                signingCredentials: new SigningCredentials(AuthenticationOptions.GetSymmetricSecurityKey(),
-                    SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-            var response = new
-            {
-                access_token = encodedJwt,
-                username = identity.Name
-            };
-
-            return Ok(response);
+            
+            return Ok(token);
         }
 
-        private ClaimsIdentity GetIdentity(string username)
-        {
-            var user = users.FirstOrDefault(x => x.Name == username);
-
-            if (user != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
-                };
-
-                var claimsIdentity = new ClaimsIdentity(claims, "Token",
-                    ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-
-            return null;
-        }
     }
 }

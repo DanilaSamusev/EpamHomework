@@ -24,7 +24,8 @@ namespace FinanceAssistant.WebApi
     {
         private static IConfiguration AppConfiguration { get; set; }
         private string PathToFinanceReport;
-        private string ConnectionString;
+        private string ConnectionToNotes;
+        private string ConnectionToUsers;
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -41,19 +42,26 @@ namespace FinanceAssistant.WebApi
                 "appsettings.json");
             AppConfiguration = builder.Build();
             PathToFinanceReport = AppConfiguration.GetSection("ConnectionStrings:PathToReport").Value;
-            ConnectionString = AppConfiguration.GetSection("ConnectionStrings:PathToNotes").Value;
+            ConnectionToNotes = AppConfiguration.GetSection("ConnectionStrings:ConnectionToNotes").Value;
+            ConnectionToUsers = AppConfiguration.GetSection("ConnectionStrings:ConnectionToUsers").Value;
         }
 
         private void ConfigureDependencies(IServiceCollection services)
         {
             services.AddScoped<UserInterface>();
             services.AddScoped<FinanceAnalyzer>();
+            services.AddScoped<TokenProvider>();
             services.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
+            services.AddScoped<IFinanceNoteService, FinanceNoteNoteService>();
+            
             services.AddScoped<IReporter, FileReporter>(fr =>
                 new FileReporter(PathToFinanceReport, new FinanceNoteToStringConverter()));
-            services.AddScoped<IFinanceNoteService, FinanceNoteNoteService>();
+            
+            services.AddScoped<IUserRepository, UserJsonRepository>(ur =>
+                new UserJsonRepository(ConnectionToUsers));
+            
             services.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
-                new FinanceNoteJsonRepository(ConnectionString));
+                new FinanceNoteJsonRepository(ConnectionToNotes));
         }
 
         private void ConfigureSwagger(IServiceCollection services)
