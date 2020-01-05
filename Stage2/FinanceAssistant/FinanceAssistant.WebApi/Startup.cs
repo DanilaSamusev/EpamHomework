@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Authentication;
 using Business.Converters;
 using Business.FinanceAnalyzer;
 using Business.FinanceReporters;
@@ -34,7 +32,7 @@ namespace FinanceAssistant.WebApi
             ConfigureTokenAuthentication(services);
             ConfigureDependencies(services);
             ConfigureSwagger(services);
-            services.AddControllers();                    
+            services.AddControllers();
         }
 
         private void ConfigureJsonFiles(IServiceCollection services)
@@ -62,11 +60,9 @@ namespace FinanceAssistant.WebApi
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"});
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description =
-                        "Please enter into field the word 'Bearer' following by space and JWT",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
@@ -77,32 +73,20 @@ namespace FinanceAssistant.WebApi
         private void ConfigureTokenAuthentication(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        options.RequireHttpsMetadata = false;
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {                            
-                            ValidateIssuer = true,                           
-                            ValidIssuer = AuthOptions.ISSUER,
-                            ValidateAudience = true,                           
-                            ValidAudience = AuthOptions.AUDIENCE,                            
-                            ValidateLifetime = true,                            
-                            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),                            
-                            ValidateIssuerSigningKey = true,
-                        };
-                    });
-        }
-
-        public class AuthOptions
-        {
-            public const string ISSUER = "MyAuthServer"; // издатель токена
-            public const string AUDIENCE = "MyAuthClient"; // потребитель токена
-            const string KEY = "mysupersecret_secretkey!123";   // ключ для шифрации
-            public const int LIFETIME = 1; // время жизни токена - 1 минута
-            public static SymmetricSecurityKey GetSymmetricSecurityKey()
-            {
-                return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
-            }
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthenticationOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = AuthenticationOptions.Audience,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthenticationOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -122,6 +106,9 @@ namespace FinanceAssistant.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

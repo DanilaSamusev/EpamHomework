@@ -1,10 +1,12 @@
 ﻿using Contracts.ServiceContracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceAssistant.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FinanceNoteController : ControllerBase
     {
         private readonly IFinanceNoteService _financeNoteService;
