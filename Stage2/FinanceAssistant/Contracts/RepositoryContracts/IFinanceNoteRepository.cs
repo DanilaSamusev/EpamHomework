@@ -8,5 +8,7 @@ namespace Contracts.RepositoryContracts
         IEnumerable<FinanceNote> GetAllExpenses();
         
         IEnumerable<FinanceNote> GetAllIncomes();
+
+        IEnumerable<FinanceNote> GetAllByUserId(int userId);
     }
 }

@@ -52,7 +52,7 @@ namespace FinanceAssistant.WebApi
             services.AddScoped<FinanceAnalyzer>();
             services.AddScoped<TokenProvider>();
             services.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
-            services.AddScoped<IFinanceNoteService, FinanceNoteNoteService>();
+            services.AddScoped<IFinanceNoteService, FinanceNoteService>();
             
             services.AddScoped<IReporter, FileReporter>(fr =>
                 new FileReporter(PathToFinanceReport, new FinanceNoteToStringConverter()));

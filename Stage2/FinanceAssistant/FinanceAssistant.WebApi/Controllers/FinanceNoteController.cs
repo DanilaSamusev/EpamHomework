@@ -17,7 +17,7 @@ namespace FinanceAssistant.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllNotes(int userId)
+        public IActionResult GetAllNotes()
         {
             var notes = _financeNoteService.GetAllNotes();
 
@@ -29,8 +29,20 @@ namespace FinanceAssistant.WebApi.Controllers
             return Ok(notes);
         }
 
+        public IActionResult GetAllNotes(int userId)
+        {
+            var notes = _financeNoteService.GetAllNotes(userId);
+            
+            if (notes == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(notes);
+        }
+        
         [HttpGet("incomes")]
-        public IActionResult GetIncomes(int userId)
+        public IActionResult GetIncomes()
         {
             var notes = _financeNoteService.GetAllIncomes();
 
@@ -43,7 +55,7 @@ namespace FinanceAssistant.WebApi.Controllers
         }
 
         [HttpGet("expenses")]
-        public IActionResult GetExpenses(int userId)
+        public IActionResult GetExpenses()
         {
             var notes = _financeNoteService.GetAllExpenses();
 

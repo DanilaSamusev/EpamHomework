@@ -6,12 +6,12 @@ using Contracts.ServiceContracts;
 
 namespace Business.Services
 {
-    public class FinanceNoteNoteService : IFinanceNoteService
+    public class FinanceNoteService : IFinanceNoteService
     {
         private readonly IFinanceNoteRepository _financeNoteRepository;
         private const decimal TaxRateInPercent = 13;
 
-        public FinanceNoteNoteService(IFinanceNoteRepository financeNoteRepository)
+        public FinanceNoteService(IFinanceNoteRepository financeNoteRepository)
         {
             _financeNoteRepository = financeNoteRepository;
         }
@@ -55,6 +55,11 @@ namespace Business.Services
             return _financeNoteRepository.GetAll();
         }
 
+        public IEnumerable<FinanceNote> GetAllNotes(int userId)
+        {
+            return _financeNoteRepository.GetAllByUserId(userId);
+        }
+        
         private decimal WithdrawTaxes(decimal financeAmount)
         {
             return financeAmount - (financeAmount / 100 * TaxRateInPercent);

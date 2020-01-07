@@ -33,16 +33,16 @@ namespace DataAccess
             return GetAll().Where(note => note.FinanceAmount > 0).ToList();
         }
 
+        public IEnumerable<FinanceNote> GetAllByUserId(int userId)
+        {
+            return GetAll().Where(note => note.UserId == userId);
+        }
+
         public IEnumerable<FinanceNote> GetAll()
         {           
             var notes = File.ReadAllText(_connectionString);
             
             return JsonSerializer.Deserialize<List<FinanceNote>>(notes);
-        }
-
-        public FinanceNote GetById(int id)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
