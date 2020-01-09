@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 
 namespace FinanceAssistant.WebApi
 {
@@ -53,13 +54,13 @@ namespace FinanceAssistant.WebApi
             services.AddScoped<TokenProvider>();
             services.AddScoped<IFinanceNoteConverter, FinanceNoteToStringConverter>();
             services.AddScoped<IFinanceNoteService, FinanceNoteService>();
-            
+
             services.AddScoped<IReporter, FileReporter>(fr =>
                 new FileReporter(PathToFinanceReport, new FinanceNoteToStringConverter()));
-            
+
             services.AddScoped<IUserRepository, UserJsonRepository>(ur =>
                 new UserJsonRepository(ConnectionToUsers));
-            
+
             services.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
                 new FinanceNoteJsonRepository(ConnectionToNotes));
         }
@@ -68,13 +69,27 @@ namespace FinanceAssistant.WebApi
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"});
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                 });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },                                                       
+                        },
+                        new List<string>()
+                    }
+                 });
             });
         }
 
@@ -119,6 +134,8 @@ namespace FinanceAssistant.WebApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+
         }
     }
 }

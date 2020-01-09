@@ -21,6 +21,8 @@ namespace FinanceAssistant.WebApi.Controllers
         {
             var notes = _financeNoteService.GetAllNotes();
 
+            var claims = HttpContext.Request.Query["claims"];
+
             if (notes == null)
             {
                 return BadRequest();
@@ -28,19 +30,7 @@ namespace FinanceAssistant.WebApi.Controllers
 
             return Ok(notes);
         }
-
-        public IActionResult GetAllNotes(int userId)
-        {
-            var notes = _financeNoteService.GetAllNotes(userId);
-            
-            if (notes == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(notes);
-        }
-        
+     
         [HttpGet("incomes")]
         public IActionResult GetIncomes()
         {

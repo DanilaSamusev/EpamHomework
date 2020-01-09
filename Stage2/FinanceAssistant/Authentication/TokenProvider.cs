@@ -51,7 +51,7 @@ namespace Authentication
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
-                //new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
+                new Claim("UserId", "1"),
             };
             var claimsIdentity = new ClaimsIdentity(claims, "Token",
                 ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
