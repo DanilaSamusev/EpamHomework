@@ -49,8 +49,7 @@ namespace Authentication
             }
 
             var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
+            {                
                 new Claim("UserId", "1"),
             };
             var claimsIdentity = new ClaimsIdentity(claims, "Token",
