@@ -21,7 +21,7 @@ namespace FinanceAssistant.WebApi.Controllers
         {
             var notes = _financeNoteService.GetAllNotes();
 
-            var claims = HttpContext.Request.Query["claims"];
+            var user = User;
 
             if (notes == null)
             {

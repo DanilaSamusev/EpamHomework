@@ -24,7 +24,7 @@ namespace FinanceAssistant.WebApi.Controllers
                 return BadRequest("Check input data!");
             }
             
-            return Ok(token);
+            return Ok($"Bearer {token}");
         }
 
     }

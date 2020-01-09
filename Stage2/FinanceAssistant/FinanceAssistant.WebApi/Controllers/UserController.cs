@@ -12,9 +12,7 @@ namespace FinanceAssistant.WebApi.Controllers
 
         [HttpGet]
         public IActionResult GetUser(int id)
-        {
-            var claims = HttpContext.Request.Query["claims"];
-
+        {           
             return Ok();
         }
 
