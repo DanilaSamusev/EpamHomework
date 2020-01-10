@@ -24,9 +24,10 @@ namespace FinanceAssistant.WebApi
     public class Startup
     {
         private static IConfiguration AppConfiguration { get; set; }
-        private string PathToFinanceReport;
-        private string ConnectionToNotes;
-        private string ConnectionToUsers;
+        private string _pathToFinanceReport;
+        private string _connectionToNotes;
+        private string _connectionToUsers;
+        private string _connectionToRoles;
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -42,9 +43,10 @@ namespace FinanceAssistant.WebApi
             var builder = new ConfigurationBuilder().AddJsonFile(
                 "appsettings.json");
             AppConfiguration = builder.Build();
-            PathToFinanceReport = AppConfiguration.GetSection("ConnectionStrings:PathToReport").Value;
-            ConnectionToNotes = AppConfiguration.GetSection("ConnectionStrings:ConnectionToNotes").Value;
-            ConnectionToUsers = AppConfiguration.GetSection("ConnectionStrings:ConnectionToUsers").Value;
+            _pathToFinanceReport = AppConfiguration.GetSection("ConnectionStrings:PathToReport").Value;
+            _connectionToNotes = AppConfiguration.GetSection("ConnectionStrings:ConnectionToNotes").Value;
+            _connectionToUsers = AppConfiguration.GetSection("ConnectionStrings:ConnectionToUsers").Value;
+            _connectionToRoles = AppConfiguration.GetSection("ConnectionStrings:ConnectionToRoles").Value;
         }
 
         private void ConfigureDependencies(IServiceCollection services)
@@ -56,13 +58,16 @@ namespace FinanceAssistant.WebApi
             services.AddScoped<IFinanceNoteService, FinanceNoteService>();
 
             services.AddScoped<IReporter, FileReporter>(fr =>
-                new FileReporter(PathToFinanceReport, new FinanceNoteToStringConverter()));
+                new FileReporter(_pathToFinanceReport, new FinanceNoteToStringConverter()));
 
             services.AddScoped<IUserRepository, UserJsonRepository>(ur =>
-                new UserJsonRepository(ConnectionToUsers));
+                new UserJsonRepository(_connectionToUsers));
 
             services.AddScoped<IFinanceNoteRepository, FinanceNoteJsonRepository>(fr =>
-                new FinanceNoteJsonRepository(ConnectionToNotes));
+                new FinanceNoteJsonRepository(_connectionToNotes));
+            
+            services.AddScoped<IRoleRepository, RoleJsonRepository>(rr =>
+                new RoleJsonRepository(_connectionToRoles));    
         }
 
         private void ConfigureSwagger(IServiceCollection services)
